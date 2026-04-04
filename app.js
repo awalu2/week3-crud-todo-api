@@ -20,6 +20,18 @@ app.get("/todos/active", (req, res) => {
   res.status(200).json(activeTodos);
 });
 
+// GET a single todo using its ID
+app.get("/todos/:id", (req, res) => {
+  const todo = todos.find((t) => t.id === parseInt(req.params.id));
+
+  if (!todo) {
+    return res.status(404).json({ message: "Todo not found" });
+  }
+
+  res.status(200).json(todo);
+});
+
+
 // POST New – Create
 app.post('/todos', (req, res) => {
   const newTodo = { id: todos.length + 1, ...req.body }; // Auto-ID
@@ -58,5 +70,5 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Server error!' });
 });
 
-const PORT = 3002;
+const PORT = 5000;
 app.listen(PORT, () => console.log(`Server on port ${PORT}`));
