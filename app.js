@@ -16,7 +16,7 @@ app.get('/todos', (req, res) => {
 
 // Obtain active users
 app.get("/todos/active", (req, res) => {
-  const activeTodos = todos.filter((t) => t.completed);
+  const activeTodos = todos.filter((t) => !t.completed);
   res.status(200).json(activeTodos);
 });
 
