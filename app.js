@@ -16,9 +16,16 @@ app.get('/todos', (req, res) => {
 
 // Obtain active users
 app.get("/todos/active", (req, res) => {
-  const activeTodos = todos.filter((t) => !t.completed === true);
+  const activeTodos = todos.filter((t) => !t.completed);
   res.status(200).json(activeTodos);
 });
+
+//Obtain completed tasks
+app.get('/todos/completed', (req, res) => {
+  const completed = todos.filter((t) => t.completed);
+  res.json(completed);
+});
+
 
 // GET a single todo using its ID
 app.get("/todos/:id", (req, res) => {
